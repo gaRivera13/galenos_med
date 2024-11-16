@@ -1,0 +1,458 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<html>
+ <head>
+  <title>
+   MiRedSalud
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+ </head>
+
+ <style>
+  /* General Body Styles */
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #E6F7F8;
+  }
+
+  /* Header Styles */
+  .header {
+    background-color: #00a99d;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #E0E0E0;
+  }
+
+  .header input[type="text"] {
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+  }
+
+  .header .search-icon {
+    color: white;
+    margin-left: 10px;
+  }
+
+  .header .logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .header .logo img {
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .header a {
+    text-decoration: none;
+    color: #00A19B;
+    font-size: 14px;
+  }
+
+  .header a:hover {
+    text-decoration: underline;
+  }
+
+  .header .menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .header .menu a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+
+  .header .menu .highlight {
+    background-color: #8dc63f;
+    padding: 5px 10px;
+    border-radius: 3px;
+  }
+
+  /* Main Banner Styles */
+  .main-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+  }
+
+  .main-banner img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .main-banner .banner-text {
+    max-width: 50%;
+  }
+
+  .main-banner .banner-text h1 {
+    color: #00a99d;
+    font-size: 24px;
+  }
+
+  .main-banner .banner-text p {
+    color: #666;
+  }
+
+  .main-banner .banner-text button {
+    background-color: #00a99d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Services Section */
+  .services {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: white;
+    margin-top: 20px;
+  }
+
+  .services .service {
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #e6f7f7;
+    width: 18%;
+  }
+
+  .services .service i {
+    font-size: 30px;
+    color: #00a99d;
+  }
+
+  .services .service p {
+    color: #00a99d;
+    font-weight: bold;
+  }
+
+  /* Plans Section */
+  .plans {
+    padding: 20px;
+    background-color: white;
+    margin-top: 20px;
+  }
+
+  .plans h2 {
+    color: #00a99d;
+    text-align: center;
+  }
+
+  .plans .plan-cards {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+
+  .plans .plan-card {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    width: 18%;
+  }
+
+  .plans .plan-card img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .plans .plan-card p {
+    color: #00a99d;
+    font-weight: bold;
+  }
+
+  .plans .plan-card .price {
+    color: #ff6600;
+    font-size: 24px;
+  }
+
+  .plans .plan-card button {
+    background-color: #8dc63f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Login Box */
+  .login-container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column !important;
+    padding: 20px !important;
+  }
+
+  .login-box {
+    
+    background-color: #FFFFFF !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+    width: 500px !important;
+    text-align: center !important;
+    margin: 0 auto; /* Centra horizontalmente */
+  }
+
+  .login-box img {
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .login-box h2 {
+    color: #00A19B;
+    margin: 10px 0;
+  }
+
+  .login-box p {
+    color: #666666;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .login-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+  }
+
+  .login-box .forgot-password {
+    text-align: right;
+    font-size: 12px;
+    color: #00A19B;
+  }
+
+  .login-box .forgot-password a {
+    text-decoration: none;
+    color: #00A19B;
+  }
+
+  .login-box .forgot-password a:hover {
+    text-decoration: underline;
+}
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+.login-box .register-btn {
+    background-color: #FFFFFF;
+    color: #00A19B;
+    border: 1px solid #00A19B;
+}
+.login-box .register-btn:hover {
+    background-color: #00A19B;
+    color: #FFFFFF;
+}
+.login-box .login-btn {
+    background-color: #A3D900;
+    color: #FFFFFF;
+}
+.login-box .login-btn:hover {
+    background-color: #8BBF00;
+}
+
+  /* Benefits Section */
+  .benefits {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    width: 100%;
+  }
+
+  .benefit {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .benefit img {
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .benefit p {
+    color: #666666;
+    font-size: 14px;
+  }
+
+  /* FAQ Section */
+  .faq {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px 0;
+  }
+
+  .faq h3 {
+    color: #00A19B;
+    margin-bottom: 10px;
+  }
+
+  .faq a {
+    text-decoration: none;
+    color: #00A19B;
+    display: block;
+    margin: 5px 0;
+  }
+
+  .faq a:hover {
+    text-decoration: underline;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 20px;
+    background-color: white;
+    margin-top: 20px;
+  }
+
+  .footer .footer-section {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .footer .footer-section .footer-item {
+    text-align: center;
+    width: 18%;
+  }
+
+  .footer .footer-section .footer-item i {
+    font-size: 30px;
+    color: #00a99d;
+  }
+
+  .footer .footer-section .footer-item p {
+    color: #00a99d;
+    font-weight: bold;
+  }
+</style>
+
+
+ <body>
+  <div class="container">
+   <div class="login-box">
+    <img alt="User Icon" height="50" src="https://storage.googleapis.com/a1aa/image/RBt99quhFrolLx3g84XuzpG4ctWrmETHoqvm136jpIWqyL8E.jpg" width="50"/>
+    <h2>
+     MiREDSALUD
+    </h2>
+    <p>
+     Podrás revisar tus resultados de exámenes, citas, órdenes y recetas
+    </p>
+    <section>
+      <form id="form" method="POST" class=" border-3 p-4" style="font-weight: bold;">
+        {% csrf_token %} 
+        {{ form|as_bootstrap_form }}
+
+
+        <div class="forgot-password">
+          <a href="#">
+           Olvidé mi contraseña
+           <i class="fas fa-lock">
+           </i>
+          </a>
+         </div>
+         <button class="register-btn">
+          Registrarme
+         </button>
+         
+          <button type="submit" class="login-btn"> Ingresar </button>
+        </div>
+      </form>
+    </section>
+    
+   <div class="benefits">
+    <div class="benefit">
+     <img alt="Exam Results Icon" height="50" src="https://storage.googleapis.com/a1aa/image/feLAk1jb4AliM0zJlFqvQLnTDgUh3tQBsCObEkqiprUtKvwTA.jpg" width="50"/>
+     <p>
+      Ver en línea los resultados de tus exámenes.
+     </p>
+    </div>
+    <div class="benefit">
+     <img alt="Family Information Icon" height="50" src="https://storage.googleapis.com/a1aa/image/YsSmYXfkzIRTH6R5MczC1N7D3IErFA1dQ8bow6YMQFEWlX4JA.jpg" width="50"/>
+     <p>
+      Toda la información médica de tu familia en un solo lugar.
+     </p>
+    </div>
+    <div class="benefit">
+     <img alt="Medical History Icon" height="50" src="https://storage.googleapis.com/a1aa/image/GBMCR3tYOv5LBNUEgXvnqa88INvoeK7xBSLftRftbf3qq8CPB.jpg" width="50"/>
+     <p>
+      Revisar tu historial médico y citas realizadas.
+     </p>
+    </div>
+    <div class="benefit">
+     <img alt="Orders and Prescriptions Icon" height="50" src="https://storage.googleapis.com/a1aa/image/O1PtcZfJKXXeo0x5f8Iuk7BlZOjOdQgSW8UfspVGUfexqyL8E.jpg" width="50"/>
+     <p>
+      Archivo histórico de órdenes y recetas.
+     </p>
+    </div>
+   </div>
+   <div class="faq">
+    <h3>
+     Conoce más de MiRedSalud
+    </h3>
+    <a href="#">
+     ¿Qué es MiRedSalud?
+    </a>
+    <a href="#">
+     ¿Cómo crear mi perfil?
+    </a>
+    <a href="#">
+     ¿Qué información encontraré en MiRedSalud?
+    </a>
+   </div>
+  </div>
+ </body>
+</html>
+
+<!-- <div class="instrucciones-para-el-alumno">
+  INSTRUCCIONES PARA EL ALUMNO (ELIMINALO DESPUES DE LEERLO):<br>
+  - Pagina para ingresar a la tienda <br>
+  - Pone aquí tu formulario <br>
+  - Si quieres puedes usar el formulario que se te entrega, pero debes cambiar su gráfica con la tuya <br>
+  - Si quieres mantener tu propio formulario, debes fijarte que tenga los "id" y "name" del formulario de Django <br>
+  - Por ejemplo, si tu campo se llama "username", debes usar los atributos <b>name="username"</b> y <b>id="id_username"</b> (Django le antepone "id_" al nombre del campo)
+</div> -->
+  
+  <!-- Combobox de usuarios (QUITAR EN VERSION DE PRODUCCION DEL SOFTWARE) -->
+  <!-- NO LO BORRES PARA QUE PUEDAS HACER TUS PRUEBAS MAS RAPIDAMENTE  -->
+  {% include 'common/combobox_usuarios.html' %}
+  
+{% endblock content %}
+
+{% block script %}
+  <script src="{% static 'core/js/ingresar.js' %}"></script>
+{% endblock script %}
+              <!-- <p class="ficha_titulo" style="text-align: center;">Iniciar Sesión </p>
+              <div class="mb-5 fw-bold">
+                <label for="id_username" style="text-align: left;">Cuenta</label>
+                <input type="text" class="form-control" id="id_username" name="username" placeholder="Ingrese nombre de usuario" value=""/>                   
+              </div>
+              <div class="mb-5 fw-bold">
+                <label for="id_password" style="text-align: left;">Contraseña</label>
+                <input type="password" class="form-control" id="id_password" name="password" placeholder="Ingrese su Contraseña" value=""/>
+              </div> -->

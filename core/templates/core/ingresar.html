@@ -6,12 +6,12 @@
 <html>
  <head>
   <title>
-   MiRedSalud
+   GalenosMed
   </title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
- </head>
+</head>
 
- <style>
+<style>
   /* General Body Styles */
   body {
     font-family: 'Roboto', sans-serif;
@@ -248,117 +248,117 @@
 
   .login-box .forgot-password a:hover {
     text-decoration: underline;
-}
-.login-box button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    margin: 10px 0;
-    cursor: pointer;
-}
-.login-box .register-btn {
-    background-color: #FFFFFF;
-    color: #00A19B;
-    border: 1px solid #00A19B;
-}
-.login-box .register-btn:hover {
-    background-color: #00A19B;
-    color: #FFFFFF;
-}
-.login-box .login-btn {
-    background-color: #A3D900;
-    color: #FFFFFF;
-}
-.login-box .login-btn:hover {
-    background-color: #8BBF00;
-}
-
-  /* Benefits Section */
-  .benefits {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
-    width: 100%;
+  }
+  .login-box button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin: 10px 0;
+      cursor: pointer;
+  }
+  .login-box .register-btn {
+      background-color: #FFFFFF !important;
+      color: #00A19B !important;
+      border: 1px solid #00A19B !important;
+  }
+  .login-box .register-btn:hover {
+      background-color: #00A19B !important;
+      color: #FFFFFF !important;
+  }
+  .login-box .login-btn {
+      background-color: #A3D900;
+      color: #FFFFFF;
+  }
+  .login-box .login-btn:hover {
+      background-color: #8BBF00;
   }
 
-  .benefit {
-    background-color: #FFFFFF;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 200px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+    /* Benefits Section */
+    .benefits {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+      width: 100%;
+    }
 
-  .benefit img {
-    height: 50px;
-    margin-bottom: 10px;
-  }
+    .benefit {
+      background-color: #FFFFFF;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 200px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-  .benefit p {
-    color: #666666;
-    font-size: 14px;
-  }
+    .benefit img {
+      height: 50px;
+      margin-bottom: 10px;
+    }
 
-  /* FAQ Section */
-  .faq {
-    width: 100%;
-    max-width: 800px;
-    margin: 20px 0;
-  }
+    .benefit p {
+      color: #666666;
+      font-size: 14px;
+    }
 
-  .faq h3 {
-    color: #00A19B;
-    margin-bottom: 10px;
-  }
+    /* FAQ Section */
+    .faq {
+      width: 100%;
+      max-width: 800px;
+      margin: 20px 0;
+    }
 
-  .faq a {
-    text-decoration: none;
-    color: #00A19B;
-    display: block;
-    margin: 5px 0;
-  }
+    .faq h3 {
+      color: #00A19B;
+      margin-bottom: 10px;
+    }
 
-  .faq a:hover {
-    text-decoration: underline;
-  }
+    .faq a {
+      text-decoration: none;
+      color: #00A19B;
+      display: block;
+      margin: 5px 0;
+    }
 
-  /* Footer */
-  .footer {
-    padding: 20px;
-    background-color: white;
-    margin-top: 20px;
-  }
+    .faq a:hover {
+      text-decoration: underline;
+    }
 
-  .footer .footer-section {
-    display: flex;
-    justify-content: space-around;
-  }
+    /* Footer */
+    .footer {
+      padding: 20px;
+      background-color: white;
+      margin-top: 20px;
+    }
 
-  .footer .footer-section .footer-item {
-    text-align: center;
-    width: 18%;
-  }
+    .footer .footer-section {
+      display: flex;
+      justify-content: space-around;
+    }
 
-  .footer .footer-section .footer-item i {
-    font-size: 30px;
-    color: #00a99d;
-  }
+    .footer .footer-section .footer-item {
+      text-align: center;
+      width: 18%;
+    }
 
-  .footer .footer-section .footer-item p {
-    color: #00a99d;
-    font-weight: bold;
-  }
+    .footer .footer-section .footer-item i {
+      font-size: 30px;
+      color: #00a99d;
+    }
+
+    .footer .footer-section .footer-item p {
+      color: #00a99d;
+      font-weight: bold;
+    }
 </style>
 
 
- <body>
+<body>
   <div class="container">
    <div class="login-box">
     <img alt="User Icon" height="50" src="https://storage.googleapis.com/a1aa/image/RBt99quhFrolLx3g84XuzpG4ctWrmETHoqvm136jpIWqyL8E.jpg" width="50"/>
     <h2>
-     MiREDSALUD
+     GALENOSMED
     </h2>
     <p>
      Podrás revisar tus resultados de exámenes, citas, órdenes y recetas
@@ -376,11 +376,14 @@
            </i>
           </a>
          </div>
+         {% if not user.is_authenticated %}
          <button class="register-btn">
-          Registrarme
+           <a class="nav-link active" aria-current="page" href="{% url 'registrarme' %}">
+             Registrarme
+           </a>
          </button>
-         
-          <button type="submit" class="login-btn"> Ingresar </button>
+         {% endif %}
+          <button type="submit" href="{% url 'ingresar' %}" class="login-btn"> Ingresar </button>
         </div>
       </form>
     </section>
@@ -411,18 +414,19 @@
      </p>
     </div>
    </div>
-   <div class="faq">
+   <br>
+   <div class="faq" style="text-align: center; margin: auto">
     <h3>
-     Conoce más de MiRedSalud
+     Conoce más de GalenosMed
     </h3>
     <a href="#">
-     ¿Qué es MiRedSalud?
+     ¿Qué es GalenosMed?
     </a>
     <a href="#">
      ¿Cómo crear mi perfil?
     </a>
     <a href="#">
-     ¿Qué información encontraré en MiRedSalud?
+     ¿Qué información encontraré en GalenosMed?
     </a>
    </div>
   </div>

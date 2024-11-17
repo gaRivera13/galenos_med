@@ -61,6 +61,14 @@ def nosotros(request):
     # CREAR: renderización de página
     return render(request, 'core/nosotros.html')
 
+def AgendarCita(request):
+    # CREAR: renderización de página
+    return render(request, 'core/AgendarCita.html')
+
+def AnularHora(request):
+    # CREAR: renderización de página
+    return render(request, 'core/AnularHora.html')
+
 def premio(request):
     return render(request, 'core/premio.html')
 

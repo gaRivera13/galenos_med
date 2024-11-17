@@ -4,11 +4,12 @@ from .views import usuarios, bodega, ventas, boleta, ingresar, usuarios
 from .views import misdatos, miscompras, salir, carrito, ficha
 from .views import cambiar_estado_boleta, poblar, obtener_productos, eliminar_producto_en_bodega
 from .views import premio, eliminar_producto_en_carrito, agregar_producto_al_carrito
-from .views import vaciar_carrito, mipassword, cambiar_password, comprar_ahora
+from .views import vaciar_carrito, mipassword, cambiar_password, comprar_ahora, AgendarCita, AnularHora
 
 urlpatterns = [
     path('', inicio, name='inicio'),
     path('inicio', inicio, name='inicio'),
+    path('AgendarCita', AgendarCita, name='AgendarCita'),
     path('registrarme', registrarme, name='registrarme'),
     path('nosotros', nosotros, name='nosotros'),
     path('productos/<accion>/<id>', productos, name='productos'),
@@ -33,4 +34,5 @@ urlpatterns = [
     path('comprar_ahora', comprar_ahora, name='comprar_ahora'),
     path('premio', premio, name='premio'),
     path('poblar', poblar, name='poblar'),
+    path('AnularHora', AnularHora, name='AnularHora'),
 ]

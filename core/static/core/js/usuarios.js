@@ -6,9 +6,7 @@ $(document).ready(function() {
   $('#id_last_name').attr('placeholder', 'Ej: Ramirez, Lopez, Warner');
   $('#id_email').attr('placeholder', 'Ej: pjuan97@gmail.com');
   $('#id_rut').attr('placeholder', 'Ej: 11111111-1 (sin puntos y con guión)');
-  $('#id_direccion').attr('placeholder', 'Calle, n° casa o edificio, n° departamento o piso\n'
-    + 'localidad o ciudad, código postal o de área\n'
-    + 'estado o provincia, ciudad, país');
+  $('#id_direccion').attr('placeholder', 'Especialidad, Antecedentes, Información extra.\n');
 
   // Cambiar el texto del combo de Tipo de usuario por "Seleccione un tipo de usuario"
   var select = document.querySelector('select[name="tipo_usuario"]');
@@ -31,7 +29,7 @@ $(document).ready(function() {
         },
         'tipo_usuario': {
           required: true,
-          inList: ['Cliente', 'Administrador'],
+          inList: ['Paciente', 'Administrador', 'Cajero', 'Medico'],
         },
         'first_name': {
           required: true,
@@ -48,9 +46,6 @@ $(document).ready(function() {
         'rut': {
           required: true,
           rutChileno: true,
-        },
-        'direccion': {
-          required: true,
         },
       },
       messages: {
@@ -76,9 +71,6 @@ $(document).ready(function() {
         'rut': {
           required: 'Debe ingresar su RUT',
           rutChileno: 'El formato del RUT no es válido',
-        },
-        'direccion': {
-          required: 'Debe ingresar su dirección',
         },
       },
       errorPlacement: function(error, element) {

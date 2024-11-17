@@ -49,9 +49,6 @@ $(document).ready(function() {
           required: true,
           rutChileno: true,
         },
-        'direccion': {
-          required: true,
-        },
       },
       messages: {
         'username': {
@@ -76,9 +73,6 @@ $(document).ready(function() {
         'rut': {
           required: 'Debe ingresar su RUT',
           rutChileno: 'El formato del RUT no es válido',
-        },
-        'direccion': {
-          required: 'Debe ingresar su dirección',
         },
       },
       errorPlacement: function(error, element) {

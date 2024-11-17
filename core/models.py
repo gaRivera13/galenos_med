@@ -63,6 +63,7 @@ class Perfil(models.Model):
         ('Administrador', 'Administrador'),
         ('Medico', 'Medico'),
         ('Superusuario', 'Superusuario'),
+        ('Cajero', 'Cajero'),
     ]
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     tipo_usuario = models.CharField(
@@ -73,7 +74,7 @@ class Perfil(models.Model):
         verbose_name='Tipo de usuario'
     )
     rut = models.CharField(max_length=15, blank=False, null=False, verbose_name='RUT')
-    direccion = models.CharField(max_length=800, blank=False, null=False, verbose_name='Especialidad')
+    direccion = models.CharField(max_length=800, blank=False, null=False, verbose_name='Descripción')
     subscrito = models.BooleanField(blank=False, null=False, verbose_name='Subscrito')
     imagen = models.ImageField(upload_to='perfiles/', blank=False, null=False, verbose_name='Imagen')
     

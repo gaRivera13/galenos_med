@@ -1,0 +1,158 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Reserva de hora</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <style>
+        body.reserva-hora {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .reserva-header {
+            background-color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .reserva-header img {
+            height: 40px;
+        }
+        .reserva-header nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+        }
+        .reserva-header nav a.active {
+            color: #00796b;
+            border-bottom: 2px solid #00796b;
+        }
+        .reserva-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .reserva-step-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .reserva-step-indicator div {
+            width: 30px;
+            height: 30px;
+            background-color: #00796b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .reserva-step-indicator div + div {
+            margin-left: 10px;
+        }
+        .reserva-step-indicator div.inactive {
+            background-color: #e0e0e0;
+        }
+        h1.reserva-title {
+            color: #00796b;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        h2.reserva-subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        label.reserva-label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-weight: 500;
+        }
+        select.reserva-select, input.reserva-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        input.reserva-input.error {
+            border-color: #d32f2f;
+        }
+        p.reserva-error-message {
+            color:#666;
+            font-size: 14px;
+            margin-top: -15px;
+            margin-bottom: 20px;
+        }
+        .reserva-button-container {
+            text-align: right;
+        }
+        .reserva-button-container button {
+            background-color: #e0e0e0;
+            color: #666;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="reserva-hora">
+    <div class="reserva-header" style="align-items: center;
+            justify-content: center;">
+        <nav>
+            <a class="active" href="#">Agendar hora</a>
+            <a href="{% url 'AnularHora' %}">Anular hora</a>
+            <a href="#">Más información</a>
+        </nav>
+    </div>
+    <div class="reserva-container">
+        <h1 style="color: #00796b !important;
+            font-size: 24px !important;
+            margin-bottom: 10px !important;
+            text-align: left;"
+            >Reserva de hora</h1>
+        <h2 class="reserva-subtitle">Paso 1: Identificar paciente</h2>
+        <div class="reserva-step-indicator">
+            <div>1</div>
+            <div class="inactive">2</div>
+            <div class="inactive">3</div>
+            <div class="inactive">4</div>
+        </div>
+        <h2 class="reserva-subtitle">¿PARA QUIÉN ES LA HORA?</h2>
+        <p>Complete los datos del <strong>Paciente</strong> que será atendido:</p>
+        <label class="reserva-label" for="documento">Documento de Identificación</label>
+        <select class="reserva-select" id="documento">
+            <option>Carnet de Identidad</option>
+            <option>Pasaporte</option>
+        </select>
+        <label class="reserva-label" for="rut">RUT del Paciente</label>
+        <input class="reserva-input error" id="rut" placeholder="Ej: 8.765.432-1" type="text"/>
+        <p class="reserva-error-message">Ingrese <strong>RUT</strong> del paciente</p>
+        <div class="reserva-button-container">
+            <button>CONTINUAR</button>
+        </div>
+    </div>
+</body>
+<br>
+<br>
+<br>
+</html>
+{% endblock content %}

@@ -183,6 +183,43 @@
            color: #00a99d;
            font-weight: bold;
        }
+       /* Asegura que el contenedor de la lista de navegación (menu) esté alineado correctamente */
+.menu .nav-item {
+    display: flex;
+    align-items: center; /* Centra verticalmente el texto */
+}
+
+/* Alinea los dropdowns con los demás enlaces de menú */
+.nav-item.dropdown {
+    display: flex;
+    align-items: center;
+}
+
+/* Asegura que los elementos del dropdown estén alineados correctamente */
+.nav-item .dropdown-menu {
+    position: absolute; /* Para evitar que los elementos se salgan de lugar */
+    top: 100%; /* Asegura que el dropdown aparezca justo debajo del link */
+    left: 0;
+}
+
+/* Asegura que el texto dentro de los dropdowns se alinee verticalmente */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+}
+
+/* Si es necesario, ajusta la altura de los elementos del dropdown para un mejor alineamiento */
+.nav-item .dropdown-menu li {
+    padding: 5px 10px; /* Puedes ajustar el espaciado según sea necesario */
+}
+
+/* También puedes hacer que los items se alineen de una manera más homogénea */
+.nav-item a {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Para asegurarse de que los elementos estén alineados */
+}
+
  </style>
 <body>
 
@@ -197,9 +234,24 @@
       </i>
      </div>
     <div class="menu">
-     <a href="#">
-         Servicios
-     </a>
+      <ul class="nav">
+        <!-- Servicios Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Servicios
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" style="color: black;">Seguros y Planes</a></li>
+                <li><a class="dropdown-item" href="#" style="color: black;">Especialidades</a></li>
+                <li><a class="dropdown-item" href="#" style="color: black;">Información al paciente</a></li>
+                <li><a class="dropdown-item" href="#" style="color: black;">Mundo Profesional</a></li>
+
+                {% if user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'AgendarCita' %}" style="color: black;">Agendar Cita</a></li>
+                {% endif %}
+            </ul>
+        </li>
+    </ul>
      <a href="#">
          Seguros y Planes
      </a>
@@ -207,12 +259,10 @@
          Especialidades
      </a>
      <a href="#">
-         Información al paciente
-     </a>
-     <a href="#">
          Mundo Profesional
      </a>
-     {% if user.is_authenticated and user.is_staff and user.is_active or user.is_authenticated and user.is_superuser and user.is_active %}
+     {% if user.is_authenticated %}
+
           
           <ul class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"  aria-expanded="false">
@@ -229,8 +279,8 @@
               {% if user.is_authenticated and user.is_superuser and user.is_active %}
               <li><a class="dropdown-item" style="color: black;" href="/admin"> Administrador de Django </a></li>
               {% endif %}
-            </ul>
           </ul>
+        </ul>
           {% endif %}
         
           
@@ -255,7 +305,7 @@
               <li><a class="dropdown-item" style="color: black;" href="{% url 'misdatos' %}"> Mis datos </a></li>
               <li><a class="dropdown-item" style="color: black;" href="{% url 'mipassword' %}"> Cambiar mi contraseña </a></li>
               {% if not user.is_staff and not user.is_superuser %}
-              <li><a class="dropdown-item" style="color: black;" href="{% url 'miscompras' %}"> Mis compras </a></li>
+            
               {% endif %}
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" style="color: black;" href="{% url 'salir' %}"> Salir </a></li>
@@ -271,120 +321,6 @@
   </div>
   </div>
 
-  <!-- BLOQUE DE MENU SUPERIOR COMPARTIDO POR TODAS LAS PAGINAS 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-black">
-    <div class="container-fluid">
-      <a  class="navbar-brand"  href="{% url 'inicio' %}" style="font-family: 'Roboto', sans-serif">
-        <img src="{% static 'core/img/logo_xv.png' %}" alt="Logo de XVerse"  style="max-height: 50px"/>
-      </a>
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">
-              Inicio
-            </a>
-          </li>      
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'nosotros' %}">
-              Nosotros
-            </a>
-          </li>
-          {% if not user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'registrarme' %}">
-              Registrarme
-            </a>
-          </li>
-          {% endif %}
-          
-          {% if user.is_authenticated and user.is_staff and user.is_active or user.is_authenticated and user.is_superuser and user.is_active %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"  aria-expanded="false">
-              Gestionar Usuarios
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'productos' 'crear' '0' %}"> Productos </a></li>
-              <li><a class="dropdown-item" href="{% url 'usuarios' 'crear' '0' %}"> Usuarios </a></li>
-              <li><a class="dropdown-item" href="{% url 'bodega' %}"> Bodega </a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="{% url 'ventas' %}"> Ventas </a></li>
-              {% if user.is_authenticated and user.is_superuser and user.is_active %}
-              <li><a class="dropdown-item" href="/admin"> Administrador de Django </a></li>
-              {% endif %}
-            </ul>
-          </li>
-          {% endif %}
-          
-          {% if not user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'ingresar' %}">
-              Iniciar sesion
-            </a>
-          </li>
-          {% endif %}
-          
-          {% if user.is_authenticated %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"  aria-expanded="false" href="{% url 'ingresar' %}">
-              {% if user.is_superuser %}
-              <span class="text-danger fw-bold">
-                {% elif user.is_staff %}
-                <span class="text-success fw-bold">
-                  {% else %}
-                  <span>
-                    {% endif %}
-                    {{ first_name }} {{ last_name }}
-                    {% if user.perfil.subscrito %}
-                    (premium)
-                    {% endif %}
-                  </span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'misdatos' %}"> Mis datos </a></li>
-              <li><a class="dropdown-item" href="{% url 'mipassword' %}"> Cambiar mi contraseña </a></li>
-              {% if not user.is_staff and not user.is_superuser %}
-              <li><a class="dropdown-item" href="{% url 'miscompras' %}"> Mis compras </a></li>
-              {% endif %}
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="{% url 'salir' %}"> Salir </a></li>
-            </ul>
-          </li>
-          {% endif %}
-  
-          {% if mostrar_carrito %}
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'carrito' %}">
-              <img src="{% static 'core/img/711897.png' %}" width="32px">
-              {{ cantidad_productos }}
-            </a>
-          </li>
-          {% endif %}
-        
-        </ul>
-  
-        <a href="{% url 'premio' %}">
-          <img src="{% static 'core/img/premio1.png' %}" style="height: 38px; margin-right: 10px;" alt="">
-        </a>
-  
-        FORMULARIO DE BUSQUEDA 
-        <form method="post" action="{% url 'inicio' %}" class="d-flex" role="search">
-          {% csrf_token %}
-  
-         Caja de texto para escribir lo que el usuario desea buscar. Este
-            campo se recupera en la VISTA por medio de request.POST.get('buscar')
-          <input class="form-control me-2" type="search" placeholder="¿Que buscas?" 
-              aria-label="Search" id="buscar" id="buscar" name="buscar">
-          
-          <button class="btn btn-outline-success" type="submit"> Buscar </button>
-        </form>
-      </div>
-    </div>
-  </nav>
-  -->
 
   <!-- BLOQUE DE CONTENIDO PERSONALIZADO DE CADA PAGINA DEL SITIO WEB -->
   <div class="content m-3 pagelayout-2">

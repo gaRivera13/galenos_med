@@ -75,7 +75,7 @@ class Perfil(models.Model):
     )
     rut = models.CharField(max_length=15, blank=False, null=False, verbose_name='RUT')
     direccion = models.CharField(max_length=800, blank=False, null=False, verbose_name='Descripción')
-    subscrito = models.BooleanField(blank=False, null=False, verbose_name='Subscrito')
+    subscrito = models.BooleanField(blank=False, null=False, verbose_name='Isapre')
     imagen = models.ImageField(upload_to='perfiles/', blank=False, null=False, verbose_name='Imagen')
     
     class Meta:

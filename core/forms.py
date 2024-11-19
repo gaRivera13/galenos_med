@@ -75,7 +75,7 @@ class RegistroUsuarioForm(UserCreationForm):
 class RegistroPerfilForm(ModelForm):
     class Meta:
         model = Perfil
-        fields = [ 'rut', 'direccion', 'imagen']
+        fields = [ 'rut', 'direccion', 'subscrito', 'imagen']
         exclude = ['tipo_usuario']
         widgets = {
             'direccion' : forms.Textarea(),
@@ -106,7 +106,7 @@ class UsuarioForm(ModelForm):
 class PerfilForm(ModelForm):
     class Meta:
         model = Perfil
-        fields = ['tipo_usuario', 'rut', 'direccion', 'imagen']
+        fields = ['tipo_usuario', 'rut', 'direccion', 'subscrito', 'imagen']
         widgets = {
             'direccion' : forms.Textarea(),
             'imagen' : forms.FileInput(),

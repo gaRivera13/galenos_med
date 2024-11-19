@@ -261,7 +261,7 @@
      <a href="#">
          Mundo Profesional
      </a>
-     {% if user.is_authenticated %}
+     {% if user.is_authenticated and user.is_staff and user.is_superuser %}
 
           
           <ul class="nav-item dropdown">

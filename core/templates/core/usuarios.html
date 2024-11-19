@@ -63,6 +63,7 @@
             <th scope="col"> Apellidos </th>
             <th scope="col"> Correo </th>
             <th scope="col"> RUT </th>
+            <th scope="col"> Isapre </th>
             <th scope="col"> Imagen </th>
             <th scope="col"> Acciones </th>
           </tr>
@@ -77,6 +78,7 @@
             <td>{{ usuario.last_name }}</td>
             <td>{{ usuario.email }}</td>
             <td>{{ usuario.perfil.rut }}</td>
+            <td> {% if usuario.perfil.subscrito %} Sí {% else %} No {% endif %} </td>
             <td>
               <img src="/media/{{ usuario.perfil.imagen }}" class="usuario-sm" alt="">
             </td>
@@ -110,4 +112,3 @@
 {% block script %}
   <script src="{% static 'core/js/usuarios.js' %}"></script>
 {% endblock script %}
-    
